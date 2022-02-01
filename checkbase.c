@@ -4,9 +4,10 @@
 
 int main(){
     FILE* fp = fopen("./F.txt", "r");
-    int n = getw(fp);
+    char st_n[5];
+    fscanf(fp, "%s", st_n);
     fclose(fp);
-    printf("%d", n);
+    printf("%s", st_n);
 /*
     fp = fopen("./p.txt", "r");
     int n = getw(fp);

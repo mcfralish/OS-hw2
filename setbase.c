@@ -3,6 +3,6 @@
 
 int main(){
     FILE* fp = fopen("./F.txt", "w+");
-    putw(5, fp);
+    fprintf(fp, "0");
     fclose(fp);
 }
