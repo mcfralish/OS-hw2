@@ -12,13 +12,13 @@ void process()
     int counter = 0;
     while(counter < 200){
         pid_t pid; //process ID
-        
+        int n;
         FILE* file = fopen(file_name, "r"); //Open file with read permissions
-        char st_n[5];
-        fscanf(file, "%s", st_n); //Read number as string
+        //char st_n[5];
+        fscanf(file, "%d", &n); //Read number
         //printf("%d\n", n);
         fclose(file);
-        int n =  atoi(st_n);//Cast to int
+        //int n =  atoi(st_n);//Cast to int
 
         if ((pid = getpid()) < 0){ //get pid
             printf("unable to get pid");
@@ -27,10 +27,10 @@ void process()
         }
         n++;
         file = fopen(file_name, "w+");//Open file with write permissions
-        sprintf(st_n, "%d", n);
+        //sprintf(st_n, "%d", n);
         //itoa(n, st_n, 10);
         //putw(n, file);
-        fprintf(file, "%s", st_n);
+        fprintf(file, "%d", n);
         fclose(file);
         counter++;
     }
@@ -39,12 +39,20 @@ void process()
 
 int main()
 {  
-        for (int i = 0; i < 3; i++){
-            if (fork() == 0){
+    if (fork() == 0){
+       printf("Starting Process 2\n");
+       if (fork() == 0){
+          printf("Starting Process 3\n");
+       }
+    }
+
+    process();
+    /*for (int i = 0; i < 3; i++){
+        if (fork() == 0){
             printf("Starting Process %d\n", (i+1));
             process(0);
             exit(0);
         }
-    }
+    }*/
     return 0;
 }
